@@ -1,0 +1,23 @@
+# Node
+node_modules/
+npm-debug.log*
+pnpm-lock.yaml
+yarn.lock
+
+# Vite/Build
+dist/
+build/
+
+# Editor/OS
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# Local DB & generated PDFs
+invoicer.db
+*.pdf
+
+# Env/Secrets (if you add them later)
+.env
+.env.*
