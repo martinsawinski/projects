@@ -1,0 +1,3 @@
+:root{ --brand-primary:#111827; --brand-accent:#2563eb; }
+body { color: var(--brand-primary); }
+a { color: var(--brand-accent); }

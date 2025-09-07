@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>{{{extra_css}}}
+    body { font-family: ui-sans-serif, system-ui, -apple-system; }
+    h1 { margin: 0; font-size: 20px; }
+    .muted { color: #6b7280; font-size: 12px }
+    table { width: 100%; border-collapse: collapse }
+    th, td { border-bottom: 1px solid #e5e7eb; padding: 8px; text-align: left }
+    tfoot td { border-top: 2px solid #111827; font-weight: 600 }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Purchase Order {{po.po_number}}</h1>
+    <div class="muted">Issue date: {{po.issue_date}}</div>
+  </header>
+  <section>
+    <div><strong>Bill To:</strong> {{customer.name}} — {{customer.billing_address}}</div>
+    <div class="muted">{{customer.email}} · {{customer.phone}}</div>
+  </section>
+  <table>
+    <thead>
+      <tr><th>Description</th><th>Qty</th><th>Unit</th><th>Unit Price</th><th>Line Disc</th><th>Amount</th></tr>
+    </thead>
+    <tbody>
+      {{#each items}}
+      <tr>
+        <td>{{description}}</td>
+        <td>{{quantity}}</td>
+        <td>{{unit}}</td>
+        <td>{{money unit_price_cents ../po.currency}}</td>
+        <td>{{money discount_cents ../po.currency}}</td>
+        <td>{{money amount_cents ../po.currency}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</body>
+</html>

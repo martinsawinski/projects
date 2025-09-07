@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>{{{extra_css}}}
+    body { font-family: ui-sans-serif, system-ui, -apple-system; }
+    h1 { margin: 0; font-size: 22px }
+    .muted { color: #6b7280; font-size: 12px }
+    table { width: 100%; border-collapse: collapse }
+    th, td { border-bottom: 1px solid #e5e7eb; padding: 8px; text-align: left }
+    tfoot td { border-top: 2px solid #111827; font-weight: 600 }
+  </style>
+</head>
+<body>
+  <header>
+    {{#if inv.logo_url}}<img src="{{inv.logo_url}}" style="height:48px" />{{/if}}
+    <h1>Invoice {{inv.invoice_number}}</h1>
+    <div class="muted">Issue: {{inv.issue_date}} · Due: {{inv.due_date}}</div>
+  </header>
+  <section>
+    <div><strong>Bill To:</strong> {{inv.name}} — {{inv.billing_address}}</div>
+    <div class="muted">{{inv.email}} · {{inv.phone}}</div>
+  </section>
+  <table>
+    <thead>
+      <tr><th>Description</th><th>Qty</th><th>Unit</th><th>Rate</th><th>Line Disc</th><th>Amount</th></tr>
+    </thead>
+    <tbody>
+      {{#each items}}
+      <tr>
+        <td>{{description}}</td>
+        <td>{{quantity}}</td>
+        <td>{{unit}}</td>
+        <td>{{money unit_price_cents ../inv.currency}}</td>
+        <td>{{money discount_cents ../inv.currency}}</td>
+        <td>{{money amount_cents ../inv.currency}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <br/>
+  <table>
+    <tbody>
+      <tr><td>Subtotal</td><td>{{money totals.subtotal inv.currency}}</td></tr>
+      <tr><td>Discount</td><td>{{money totals.discount inv.currency}}</td></tr>
+      <tr><td>Tax</td><td>{{money totals.tax inv.currency}}</td></tr>
+    </tbody>
+    <tfoot>
+      <tr><td>Total</td><td>{{money totals.total inv.currency}}</td></tr>
+    </tfoot>
+  </table>
+  <p class="muted">Notes: {{inv.notes}}</p>
+</body>
+</html>
